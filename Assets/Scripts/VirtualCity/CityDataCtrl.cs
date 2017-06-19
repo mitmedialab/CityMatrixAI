@@ -3,8 +3,10 @@ using System.Collections;
 using System.IO;
 using System.Text;
 using System;
+using UnityEngine.UI.Extensions;
 
-public class CityDataCtrl : MonoBehaviour {
+public class CityDataCtrl : MonoBehaviour
+{
 
     public VirtualCityModel cityModel;
     public string JsonURL;
@@ -78,15 +80,21 @@ public class CityDataCtrl : MonoBehaviour {
         if (data == null) return;
         JSONCityMatrix mlOrAiCity;
         float[] mlOrAiScores;
+        RadarPolygon rpOutline = radarChartOrange.transform.GetChild(0).GetComponent<RadarPolygon>();
+        RadarPolygon rpFill = radarChartOrange.transform.GetChild(1).GetComponent<RadarPolygon>();
         if (animBlink == 0)
         {
             mlOrAiCity = data.predict;
             mlOrAiScores = data.predict.objects.scores;
+            rpOutline.color = Color.red;
+            rpFill.color = new Color(1.0f, 0.0f, 0.0f, 0.25f);
         }
         else
         {
             mlOrAiCity = data.ai;
             mlOrAiScores = data.ai.objects.scores;
+            rpOutline.color = Color.green;
+            rpFill.color = new Color(0.0f, 1.0f, 0.0f, 0.25f);
         }
         for (int i = 0; i < mlOrAiCity.grid.Length; i++)
         {
