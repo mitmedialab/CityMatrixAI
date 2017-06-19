@@ -1,0 +1,9 @@
+Enter text to speak...
+
+
+Sample text: 
+
+Current tools for urban planning do not allow both expert and non-expert stakeholders to rapidly explore a range of complex scenarios with real-time feedback. To address this challenge, a dynamic, evidence-based decision support system called CityMatrix will be prototyped. It will consist of an intuitive interface, real-time simulations, and an artificial intelligence assistant to enable more informed collective decisions. The system will be tested and evaluated by comparing the problem-solving results of volunteer participants using both CityMatrix and conventional tools. 
+
+
+Current tools for urban planning do not allow both expert and non-expert stakeholders to rapidly explore a range of complex scenarios with real-time feedback. 

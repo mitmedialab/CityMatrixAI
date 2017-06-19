@@ -1,0 +1,162 @@
+0
+(mask: all; highlight: none)
+0.0
+Welcome to CityMatrix, an urban decision support system with AI assistant. 
+0.1 
+I am your AI assistant, RZ-14. 
+
+
+1
+(highlight: Lego grid)
+1.0
+Please look at what is highlighted below on the table. This is the hypothetical city district we are going to work on. 
+1.1
+Yes! We are going to use Lego bricks to build the city district. 
+
+
+2
+(highlight: building types)
+2.0
+Now the highlighted are the six different types of buildings, including three residential and three office. 
+2.1
+And each of them has small, medium, and large unit types, which will attract people of different age and income. 
+
+
+3
+(highlight: building types, Lego grid, and arrow 1)
+3.0
+You can add, remove or re-arrange the Lego blocks to create your city district. 
+
+
+4
+(highlight: building types, selection dock, and arrow 2)
+4.0
+Also, you can put one of the Lego brick into the dock highlighted here to select all the buildings which are the same type, 
+
+
+5
+(highlight: selection dock, density slider, and arrow 3)
+5.0
+and then operate the slider highlighted here to change the height, therefore the population density of these buildings.  
+
+
+6
+(highlight: 3D city model)
+6.0
+Here highlighted on the screen, you will see a three-dimensional representation of the city district you created. 
+
+
+7
+(highlight: people statistics)
+7.0
+Note that the system will calculate how many and what type of people your city district will attract, highlighted here.
+
+
+8
+(highlight: radar-chart)
+8.0
+As well as the performance of the city district in five aspects, represented by this radar-chart: 
+8.1
+population density, population diversity, energy/construction cost efficiency, traffic performance, and solar access performance. 
+
+
+9
+(highlight: radar-chart upper part)
+9.0
+According to previous research, population density and diversity are the key factors contributing to the innovation potential of the city. 
+9.1
+So we want to maximize both the population density and diversity. 
+
+
+10
+(highlight: radar-chart lower part)
+10.0
+Meanwhile, higher population density tends to generate environmental issues. 
+10.1
+That's what we would like to avoid by increasing the energy/construction cost efficiency, traffic performance and solar access performance. 
+10.2
+So your goal is to create a city district which maximizes the performance of all five aspects. 
+
+
+11
+(highlight: Visualization slider, Lego grid with Viz, and arrow 4)
+11.0
+To better understand the impact of your design to the city performance, 
+11.1
+you can inspect each of the aspects by changing the visualization slider highlighted here. 
+11.2
+When you slide the Lego brick on the slider to one of the items, you will see the correspondent heatmap of the performance of that aspect on the Lego grid. 
+11.3
+Green is good. Red is bad. As simple as that! 
+
+
+12
+(highlight: radar-chart "Population Density" part, viz slider "Population Density" part)
+12.0
+First, let's look at the "Population Density". The heatmap reflects the number of the people in the building. 
+12.1
+The greener, the more people in that building. 
+12.2
+The "Population Density" axis on the radar-chart reflects the total number of the people in the district. 
+12.3
+The higher the score, the denser this district's population is. 
+
+
+13
+(highlight: radar-chart "Population Diversity" part, viz slider "Population Diversity" part)
+13.0
+Then, let's look at the "Population Diversity". The heatmap reflects how mixed are the residential and office types, 
+13.1
+as well as the balance between the working and living. The greener, the more diverse. 
+13.2
+The "Population Diversity" axis on radar-chart is the aggregated diversity throughout the whole district you built. 
+13.3
+The higher the score, the more diverse the population is.  
+
+
+14
+(highlight: radar-chart "Energy/Cost Efficiency" part, viz slider "Energy/Cost Efficiency" part)
+14.0
+Move to "Energy/Cost Efficiency". The heatmap shows how much is the building energy consumption and building construction cost per person. 
+14.1
+Normally The energy consumption and building construction cost per square meter are similar for any building, which means the more small unit residential or office buildings, the better this performance. 
+14.2
+The "Energy/Cost Efficiency" axis on radar-chart is the averaged cost and energy consumption per person for all the buildings. 
+14.3
+The higher the score, the more efficient the energy and the cost of the city district is. 
+
+
+15
+(highlight: radar-chart "Traffic Performance" part, viz slider "Traffic Performance" part)
+15.0
+Switch to "Traffic Performance". Assuming we are using a high efficient autonomous sharing mobility system,  
+15.1
+the heatmap here shows how much traffic volume is in the city district in one day.
+15.2
+The "Traffic Performance" axis on radar-chart is overall traffic performance of the whole district you built. 
+15.3
+A Higher score means less traffic. 
+
+
+16
+(highlight: radar-chart "Solar Access Performance" part, viz slider "Solar Access Performance" part)
+16.0
+Last, let's look at "Solar Access Performance". Assuming we want to fully utilize the solar energy on the roof top of all the buildings,  
+16.1
+the heatmap shows how much solar radiation you can get in each area in the city district annually. The greener the better. Less shadow from other buildings. 
+16.2
+The "Solar Access Performance" axis on radar-chart is overall solar energy this city district could gather annually. 
+16.3
+The higher score, the better. 
+
+
+17
+(USER TEST STAGE ONE: NO AI ASSISTANT. mask: none; highlight: none)
+17.0
+Now, you've been through the introduction of CityMatrix functionalities. 
+17.1
+Again, your goal is work collaboratively to build a city district with these Lego bricks which maximize all five aspects of the city performance. 
+17.2
+You have 15 minutes for this round. 
+17.3
+It's Lego time! Good Luck! 

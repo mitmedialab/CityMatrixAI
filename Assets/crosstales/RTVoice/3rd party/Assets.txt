@@ -1,0 +1,61 @@
+#Adventure Creator
+Version: 1.5.2
+https://www.assetstore.unity3d.com/en/#!/content/11896?aid=1011lNGT
+
+
+#Cinema Director
+Version: 1.4.5.1
+https://www.assetstore.unity3d.com/en/#!/content/19779?aid=1011lNGT
+
+
+#Dialogue System
+Version: 1.6.4
+https://www.assetstore.unity3d.com/en/#!/content/11672?aid=1011lNGT
+
+Please use the provided example from:
+Assets\Dialogue System\Third Party Support\RTVoice Support.unitypackage
+
+
+#LDC
+Version: 4.7
+https://www.assetstore.unity3d.com/en/#!/content/5020?aid=1011lNGT
+
+
+#LipSync
+Version: 1.1
+https://www.assetstore.unity3d.com/en/#!/content/32117?aid=1011lNGT
+
+
+#NPC Chat
+Version: 1.76
+https://www.assetstore.unity3d.com/en/#!/content/9723?aid=1011lNGT
+
+
+#PlayMaker
+Version: 1.8.1
+https://www.assetstore.unity3d.com/en/#!/content/368?aid=1011lNGT
+
+
+#SALSA
+Version: 1.4.0
+https://www.assetstore.unity3d.com/en/#!/content/16944?aid=1011lNGT
+
+
+#SLATE
+Version: 1.4.0
+https://www.assetstore.unity3d.com/en/#!/content/56558?aid=1011lNGT
+
+
+#THE Dialogue Engine
+Version: 2.0
+https://www.assetstore.unity3d.com/en/#!/content/42467?aid=1011lNGT
+
+
+
+#Already working - demos coming soon:
+
+##uSequencer
+https://www.assetstore.unity3d.com/en/#!/content/3666?aid=1011lNGT
+
+##Quest System Pro
+https://www.assetstore.unity3d.com/en/#!/content/63460?aid=1011lNGT
