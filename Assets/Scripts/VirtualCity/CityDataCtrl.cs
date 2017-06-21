@@ -4,6 +4,8 @@ using System.IO;
 using System.Text;
 using System;
 using UnityEngine.UI.Extensions;
+using cakeslice;
+using System.Collections.Generic;
 
 public class CityDataCtrl : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class CityDataCtrl : MonoBehaviour
     public UnityEngine.UI.Extensions.RadarPolygon chart;
 
     public GameObject radarChartOrange;
+
+    public bool highlightAI;
 
     //private StreamReader sReader;
     //private string readJson;
@@ -56,6 +60,8 @@ public class CityDataCtrl : MonoBehaviour
         */
     }
 
+    Queue<GameObject> highlightsToClear = new Queue<GameObject>();
+    Queue<GameObject> objectsToHighlight = new Queue<GameObject>();
     int i = 0;
     // Update is called once per frame
     void Update () {
@@ -67,24 +73,34 @@ public class CityDataCtrl : MonoBehaviour
         i++;
         */
 
-        udpString = GetComponent<UDPReceive>().udpString;
+        if (GetComponent<UDPReceive>().fresh)
+        {
+            udpString = GetComponent<UDPReceive>().udpString;
+            GetComponent<UDPReceive>().fresh = false;
+        } else
+        {
+            return;
+        }
         //Debug.Log(udpString);
         //JSONCityMatrix data = JsonUtility.FromJson<JSONCityMatrix>(udpString);
         data = JsonUtility.FromJson<JSONCityMatrixMLAI>(udpString);
         //Debug.Log(data.predict);
-
+        if (data == null) return;
         //RZ 170615
-        AIStep = data.ai.objects.AIStep;
+        //AIStep = data.ai.objects.AIStep;
         animBlink = data.ai.objects.animBlink;
 
-        if (data == null) return;
+        
         JSONCityMatrix mlOrAiCity;
+        JSONCityMatrix otherCity;
+
         float[] mlOrAiScores;
         RadarPolygon rpOutline = radarChartOrange.transform.GetChild(0).GetComponent<RadarPolygon>();
         RadarPolygon rpFill = radarChartOrange.transform.GetChild(1).GetComponent<RadarPolygon>();
         if (animBlink == 0)
         {
             mlOrAiCity = data.predict;
+            otherCity = data.ai;
             mlOrAiScores = data.predict.objects.scores;
             rpOutline.color = Color.red;
             rpFill.color = new Color(1.0f, 0.0f, 0.0f, 0.25f);
@@ -92,23 +108,60 @@ public class CityDataCtrl : MonoBehaviour
         else
         {
             mlOrAiCity = data.ai;
+            otherCity = data.predict;
             mlOrAiScores = data.ai.objects.scores;
             rpOutline.color = Color.green;
             rpFill.color = new Color(0.0f, 1.0f, 0.0f, 0.25f);
         }
+
+        var mainDens = mlOrAiCity.objects.densities;
+        var otherDens = otherCity.objects.densities;
         for (int i = 0; i < mlOrAiCity.grid.Length; i++)
         {
             JSONBuilding a = mlOrAiCity.grid[i];
             a.Correct(15, 15);
             city[a.x, a.y].JSONUpdate(a);
-        }
 
+            if(highlightAI)
+            {
+                JSONBuilding o = otherCity.grid[i];
+                if (a.Changes(o) ||
+                    (a.type != -1 && o.type != -1 && a.type < mainDens.Length && o.type < otherDens.Length && (mainDens[a.type] != otherDens[o.type])))
+                {
+                    foreach (var b in city[a.x, a.y].views)
+                    {
+                        if (b.ViewType == Building.Type.MESH)
+                        {
+                            objectsToHighlight.Enqueue(b.gameObject);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         // update densities
         BuildingDataCtrl.instance.UpdateDensities(mlOrAiCity.objects.densities);
+
 
         //RZ 17015 update radar chart values
         //radarChartOrange.GetComponent<RadarChartCtrl>().values[0] = mlOrAiCity.objects.popDensity;
         radarChartOrange.GetComponent<RadarChartCtrl>().values = mlOrAiScores;
+
+        if (highlightAI)
+        {
+            for (int idx = 0; idx < highlightsToClear.Count; idx++)
+            {
+                BuildingHighlighter.RemoveHighlight(highlightsToClear.Dequeue());
+            }
+
+            for (int idx = 0; idx < objectsToHighlight.Count; idx++)
+            {
+                GameObject o = objectsToHighlight.Dequeue();
+                BuildingHighlighter.AddHighlight(o, animBlink);
+                highlightsToClear.Enqueue(o);
+            }
+        }
+
     }
 
     /*
@@ -245,6 +298,14 @@ public class JSONBuilding
             (this.type != a.Id ||
             this.magnitude != a.Magnitude ||
             this.rot != a.Rotation);
+    }
+    public bool Changes(JSONBuilding a)
+    {
+        return this.x == a.x &&
+            this.y == a.y &&
+            (this.type != a.type ||
+            this.magnitude != a.magnitude ||
+            this.rot != a.rot);
     }
 }
 

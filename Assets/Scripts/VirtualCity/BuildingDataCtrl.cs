@@ -282,7 +282,7 @@ public class BuildingModel {
     }
 
 
-    private List<Building> views = new List<Building>();
+    internal List<Building> views = new List<Building>();
 
     public BuildingModel()
     {
@@ -351,7 +351,7 @@ public class BuildingModel {
             //b.IndicateChange();
             if (b.ViewType == Building.Type.MESH)
             {
-                b.Focus();
+                //b.Focus();
             }
         }
     }

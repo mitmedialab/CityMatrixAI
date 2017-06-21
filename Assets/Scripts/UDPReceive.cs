@@ -41,6 +41,8 @@ public class UDPReceive : MonoBehaviour
     public string udpString;
     public string AIStepString;
 
+    public bool fresh = false;
+
     private ThreadController threadController;
 
     class ThreadController
@@ -80,6 +82,7 @@ public class UDPReceive : MonoBehaviour
 
                 lastReceivedUDPPacket = text;
                 udpString = text;
+                fresh = true;
                 //allReceivedUDPPackets = allReceivedUDPPackets + text;
 
             }
