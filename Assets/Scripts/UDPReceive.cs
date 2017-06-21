@@ -39,7 +39,6 @@ public class UDPReceive : MonoBehaviour
     public string allReceivedUDPPackets = ""; // clean up this from time to time!
 
     public string udpString;
-    public string AIStepString;
 
     public bool fresh = false;
 

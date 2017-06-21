@@ -87,7 +87,7 @@ public class CityDataCtrl : MonoBehaviour
         //Debug.Log(data.predict);
         if (data == null) return;
         //RZ 170615
-        //AIStep = data.ai.objects.AIStep;
+        AIStep = data.ai.objects.AIStep;
         animBlink = data.ai.objects.animBlink;
 
         
