@@ -134,6 +134,12 @@ public class CityDataCtrl : MonoBehaviour
             rpFill.color = new Color(0.0f, 1.0f, 0.0f, 0.25f);
         }
 
+        if (highlightAI == false)
+        {
+            rpOutline.color = new Color(240.0f / 256.0f, 170.0f / 256.0f, 0.0f, 1.0f);
+            rpFill.color = new Color(240.0f / 256.0f, 170.0f / 256.0f, 0.0f, 0.25f);
+        }
+
         var mainDens = mlOrAiCity.objects.densities;
         var otherDens = otherCity.objects.densities;
         for (int i = 0; i < mlOrAiCity.grid.Length; i++)
@@ -165,6 +171,10 @@ public class CityDataCtrl : MonoBehaviour
 
         //RZ 17015 update radar chart values
         //radarChartOrange.GetComponent<RadarChartCtrl>().values[0] = mlOrAiCity.objects.popDensity;
+        for (int i = 0; i< mlOrAiScores.Length; i++)
+        {
+            mlOrAiScores[i] = Mathf.Max(0.01f, Mathf.Min(1.0f, mlOrAiScores[i]));
+        }
         radarChartOrange.GetComponent<RadarChartCtrl>().values = mlOrAiScores;
 
         if (highlightAI)
