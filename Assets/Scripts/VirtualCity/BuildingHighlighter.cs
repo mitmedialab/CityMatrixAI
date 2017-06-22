@@ -27,6 +27,7 @@ namespace cakeslice
             if (b.GetComponent<Outline>() != null)
             {
                 b.GetComponent<Outline>().eraseRenderer = true;
+                b.GetComponent<Outline>().enabled = false; //RZ 170622
             }
             foreach(Transform c in b.transform)
             {

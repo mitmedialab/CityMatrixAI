@@ -33,6 +33,8 @@ public class CityDataCtrl : MonoBehaviour
     public int AIStep = -1;
     public int animBlink = 0;
 
+    public GameObject mainView;
+
     // Use this for initialization
     void Start () {
         //StartCoroutine("Initialize");
@@ -179,12 +181,22 @@ public class CityDataCtrl : MonoBehaviour
         }
         radarChartOrange.GetComponent<RadarChartCtrl>().values = mlOrAiScores;
 
+
+        //RZ clear up all prev highlight
+        foreach (Transform child in mainView.transform)
+        {
+            GameObject ot = child.GetChild(1).GetChild(0).gameObject;
+            Debug.Log(ot);
+            BuildingHighlighter.RemoveHighlight(ot);
+        }
+
         if (highlightAI)
         {
             for (int idx = 0; idx < highlightsToClear.Count; idx++)
             {
                 BuildingHighlighter.RemoveHighlight(highlightsToClear.Dequeue());
             }
+
 
             for (int idx = 0; idx < objectsToHighlight.Count; idx++)
             {
