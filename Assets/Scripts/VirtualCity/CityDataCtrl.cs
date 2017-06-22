@@ -20,7 +20,8 @@ public class CityDataCtrl : MonoBehaviour
 
     public GameObject radarChartOrange;
 
-    public bool highlightAI;
+    public bool showAISuggestion = false;
+    public bool highlightAI = true;
 
     //private StreamReader sReader;
     //private string readJson;
@@ -86,10 +87,29 @@ public class CityDataCtrl : MonoBehaviour
         data = JsonUtility.FromJson<JSONCityMatrixMLAI>(udpString);
         //Debug.Log(data.predict);
         if (data == null) return;
-        //RZ 170615
+
+        //RZ 170615 AIStep and animBlink control
         AIStep = data.ai.objects.AIStep;
         animBlink = data.ai.objects.animBlink;
 
+        //RZ 190621 show AI suggestion and highlight or not
+        if (AIStep == 20)
+        {
+            showAISuggestion = true;
+        }
+        else
+        {
+            showAISuggestion = false;
+        }
+        if (showAISuggestion)
+        {
+            highlightAI = true;
+        }
+        else
+        {
+            animBlink = 0;
+            highlightAI = false;
+        }
         
         JSONCityMatrix mlOrAiCity;
         JSONCityMatrix otherCity;
