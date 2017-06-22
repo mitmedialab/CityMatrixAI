@@ -151,6 +151,8 @@ public class CityDataCtrl : MonoBehaviour
             if(highlightAI)
             {
                 JSONBuilding o = otherCity.grid[i];
+                o.Correct(15, 15);
+                if (a.type != o.type) Debug.Log(a);
                 if (a.Changes(o) ||
                     (a.type != -1 && o.type != -1 && a.type < mainDens.Length && o.type < otherDens.Length && (mainDens[a.type] != otherDens[o.type])))
                 {
