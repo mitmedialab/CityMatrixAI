@@ -4,7 +4,12 @@ using UnityEngine;
 using System.Linq;
 
 public class CityMatrixRadarChart : MonoBehaviour {
-    
+
+    // suggestion visibility ctrl
+    public bool showAISuggestion = true;
+    public CityDataCtrl cityDataCtrl;
+    public GameObject suggestedFills;
+
     // history ctrl
     [Range(0, 2)]
     public int showHistoryStep = 2;
@@ -63,12 +68,15 @@ public class CityMatrixRadarChart : MonoBehaviour {
 
     void Start()
     {
+        showAISuggestion = cityDataCtrl.showAISuggestion;
         metricsHistory0 = (float[])metrics.Clone();
         metricsHistory1 = (float[])metrics.Clone();
     }
 
 
     void Update() {
+
+        showAISuggestion = cityDataCtrl.showAISuggestion;
 
         // how many steps of the history do we show
         if (showHistoryStep == 1)
@@ -109,6 +117,24 @@ public class CityMatrixRadarChart : MonoBehaviour {
             history1LineEnergyTrafficSolar.SetActive(false);
             history1DashLineDiversityEnergy.SetActive(false);
             history1DashLineSolarDensity.SetActive(false);
+        }
+
+        // suggestion visiblility control
+        if (showAISuggestion)
+        {
+            suggestedLineDensityDiversity.SetActive(true);
+            suggestedLineEnergyTrafficSolar.SetActive(true);
+            suggestedDashLineDiversityEnergy.SetActive(true);
+            suggestedDashLineSolarDensity.SetActive(true);
+            suggestedFills.SetActive(true);
+        }
+        else
+        {
+            suggestedLineDensityDiversity.SetActive(false);
+            suggestedLineEnergyTrafficSolar.SetActive(false);
+            suggestedDashLineDiversityEnergy.SetActive(false);
+            suggestedDashLineSolarDensity.SetActive(false);
+            suggestedFills.SetActive(false);
         }
 
         // when there's an update

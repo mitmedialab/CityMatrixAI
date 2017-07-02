@@ -18,7 +18,8 @@ public class CityDataCtrl : MonoBehaviour
 
     public UnityEngine.UI.Extensions.RadarPolygon chart;
 
-    public GameObject radarChartOrange;
+    //public GameObject radarChartOrange;
+    public CityMatrixRadarChart CMRadarChart;
 
     public bool showAISuggestion = false;
     public bool highlightAI = true;
@@ -31,7 +32,6 @@ public class CityDataCtrl : MonoBehaviour
     //RZ 170615 expose data to AIStepCtrl
     public JSONCityMatrixMLAI data;
     public int AIStep = -1;
-    public int animBlink = 0;
 
     public GameObject mainView;
 
@@ -92,7 +92,7 @@ public class CityDataCtrl : MonoBehaviour
 
         //RZ 170615 AIStep and animBlink control
         AIStep = data.ai.objects.AIStep;
-        animBlink = data.ai.objects.animBlink;
+        //animBlink = data.ai.objects.animBlink; //RZ 170702
 
         //RZ 190621 show AI suggestion and highlight or not
         if (AIStep == 20)
@@ -103,53 +103,50 @@ public class CityDataCtrl : MonoBehaviour
         {
             showAISuggestion = false;
         }
+        
         if (showAISuggestion)
         {
             highlightAI = true;
         }
         else
         {
-            animBlink = 0;
             highlightAI = false;
         }
-        
-        JSONCityMatrix mlOrAiCity;
-        JSONCityMatrix otherCity;
 
-        float[] mlOrAiScores;
-        RadarPolygon rpOutline = radarChartOrange.transform.GetChild(0).GetComponent<RadarPolygon>();
-        RadarPolygon rpFill = radarChartOrange.transform.GetChild(1).GetComponent<RadarPolygon>();
-        if (animBlink == 0)
-        {
-            mlOrAiCity = data.predict;
-            otherCity = data.ai;
-            mlOrAiScores = data.predict.objects.scores;
-            rpOutline.color = Color.red;
-            rpFill.color = new Color(1.0f, 0.0f, 0.0f, 0.25f);
-        }
-        else
-        {
-            mlOrAiCity = data.ai;
-            otherCity = data.predict;
-            mlOrAiScores = data.ai.objects.scores;
-            rpOutline.color = Color.green;
-            rpFill.color = new Color(0.0f, 1.0f, 0.0f, 0.25f);
-        }
+        JSONCityMatrix mlCity;
+        JSONCityMatrix aiCity;
 
+        float[] mlScores;
+        float[] aiScores;
+        //RadarPolygon rpOutline = radarChartOrange.transform.GetChild(0).GetComponent<RadarPolygon>();
+        //RadarPolygon rpFill = radarChartOrange.transform.GetChild(1).GetComponent<RadarPolygon>();
+
+        mlCity = data.predict;
+        mlScores = data.predict.objects.scores;
+        //rpOutline.color = Color.red;
+        //rpFill.color = new Color(1.0f, 0.0f, 0.0f, 0.25f);
+        aiCity = data.ai;
+        aiScores = data.ai.objects.scores;
+        //rpOutline.color = Color.green;
+        //rpFill.color = new Color(0.0f, 1.0f, 0.0f, 0.25f);
+
+        /*  //RZ 170702
         if (highlightAI == false)
         {
             rpOutline.color = new Color(240.0f / 256.0f, 170.0f / 256.0f, 0.0f, 1.0f);
             rpFill.color = new Color(240.0f / 256.0f, 170.0f / 256.0f, 0.0f, 0.25f);
         }
+        */
 
-        var mainDens = mlOrAiCity.objects.densities;
-        var otherDens = otherCity.objects.densities;
-        for (int i = 0; i < mlOrAiCity.grid.Length; i++)
+        var mainDens = mlCity.objects.densities;
+        //var otherDens = otherCity.objects.densities;
+        for (int i = 0; i < mlCity.grid.Length; i++)
         {
-            JSONBuilding a = mlOrAiCity.grid[i];
+            JSONBuilding a = mlCity.grid[i];
             a.Correct(15, 15);
             city[a.x, a.y].JSONUpdate(a);
 
+            /*  //RZ 170702
             if(highlightAI)
             {
                 JSONBuilding o = otherCity.grid[i];
@@ -168,20 +165,27 @@ public class CityDataCtrl : MonoBehaviour
                     }
                 }
             }
+            */
         }
         // update densities
-        BuildingDataCtrl.instance.UpdateDensities(mlOrAiCity.objects.densities);
+        BuildingDataCtrl.instance.UpdateDensities(mlCity.objects.densities);
 
 
         //RZ 17015 update radar chart values
         //radarChartOrange.GetComponent<RadarChartCtrl>().values[0] = mlOrAiCity.objects.popDensity;
-        for (int i = 0; i< mlOrAiScores.Length; i++)
+        for (int i = 0; i < mlScores.Length; i++)
         {
-            mlOrAiScores[i] = Mathf.Max(0.01f, Mathf.Min(1.0f, mlOrAiScores[i]));
+            mlScores[i] = Mathf.Max(0.01f, Mathf.Min(1.0f, mlScores[i]));
         }
-        radarChartOrange.GetComponent<RadarChartCtrl>().values = mlOrAiScores;
+        for (int i = 0; i < aiScores.Length; i++)
+        {
+            aiScores[i] = Mathf.Max(0.01f, Mathf.Min(1.0f, aiScores[i]));
+        }
+        //radarChartOrange.GetComponent<RadarChartCtrl>().values = mlScores;  //RZ 170702
+        CMRadarChart.metrics = mlScores;
+        CMRadarChart.metricsSuggested = aiScores;
 
-
+        /*  //RZ 170702
         //RZ clear up all prev highlight
         foreach (Transform child in mainView.transform)
         {
@@ -189,7 +193,9 @@ public class CityDataCtrl : MonoBehaviour
             Debug.Log(ot);
             BuildingHighlighter.RemoveHighlight(ot);
         }
+        */
 
+        /*  //RZ 170702
         if (highlightAI)
         {
             for (int idx = 0; idx < highlightsToClear.Count; idx++)
@@ -205,6 +211,7 @@ public class CityDataCtrl : MonoBehaviour
                 highlightsToClear.Enqueue(o);
             }
         }
+        */
 
     }
 
@@ -277,8 +284,8 @@ public class CityDataCtrl : MonoBehaviour
     */
 }
 
-//RZ170614
-[Serializable]
+    //RZ170614
+    [Serializable]
 public class JSONCityMatrixMLAI
 {
     public JSONCityMatrix predict;
@@ -373,6 +380,5 @@ public class JSONObjects
 
     //RZ 170615 get meta data from JSON sent by GH VIZ
     public int AIStep;
-    public int animBlink;
     public float[] scores;
 }
