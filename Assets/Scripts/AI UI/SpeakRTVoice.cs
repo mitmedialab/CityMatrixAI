@@ -70,7 +70,7 @@ public class SpeakRTVoice : MonoBehaviour {
     {
         // get AIStep from AIStepCtrl
         AIStep = GetComponent<AIStepCtrl>().intAIStep;
-        print("speakButtonOnClick, AIstep = " + AIStep);
+        //print("speakButtonOnClick, AIstep = " + AIStep);
         StopAllCoroutines();
         //CancelInvoke();
         
@@ -101,30 +101,30 @@ public class SpeakRTVoice : MonoBehaviour {
             }
             while (subStepIntFound)
             {
-                Debug.Log("checking sub step int:" + currentSubStepInt);
+                //Debug.Log("checking sub step int:" + currentSubStepInt);
                 subStepIntFound = false;
                 for (int i = 0; i <= searchUpto - 1; i++)
                 {
                     if (linesAIScript[i].Contains(AIStep.ToString() + "." + currentSubStepInt.ToString()))
                     {
                         subStepIntFound = true;
-                        Debug.Log("found:" + AIStep.ToString() + "." + currentSubStepInt.ToString());
+                        //Debug.Log("found:" + AIStep.ToString() + "." + currentSubStepInt.ToString());
                         sentencesToSpeak.Add(linesAIScript[i+1]);
                         break;
                     }
                 }
                 if (!subStepIntFound)
                 {
-                    Debug.Log("not found!:" + AIStep.ToString() + "." + currentSubStepInt.ToString());
+                    //Debug.Log("not found!:" + AIStep.ToString() + "." + currentSubStepInt.ToString());
                 }
                 else
                 {
                     currentSubStepInt++;
-                    Debug.Log("checked, next sub step int:" + currentSubStepInt);
+                    //Debug.Log("checked, next sub step int:" + currentSubStepInt);
                 }
             }
             lastSubStepInt = currentSubStepInt - 1;
-            Debug.Log("last sub step int found: " + lastSubStepInt);
+            //Debug.Log("last sub step int found: " + lastSubStepInt);
 
             // speak sub sentences
             stepSpeakAndButton(sentencesToSpeak);
