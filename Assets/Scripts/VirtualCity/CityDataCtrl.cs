@@ -67,7 +67,7 @@ public class CityDataCtrl : MonoBehaviour
     Queue<GameObject> objectsToHighlight = new Queue<GameObject>();
     int i = 0;
     // Update is called once per frame
-    void Update () {
+    void Update() {
         /*
         if (i % 30 == 0)
         {
@@ -103,7 +103,7 @@ public class CityDataCtrl : MonoBehaviour
         {
             showAISuggestion = false;
         }
-        
+
         if (showAISuggestion)
         {
             highlightAI = true;
@@ -116,17 +116,26 @@ public class CityDataCtrl : MonoBehaviour
         JSONCityMatrix mlCity;
         JSONCityMatrix aiCity;
 
-        float[] mlScores;
-        float[] aiScores;
+        float[] mlMetrics;
+        float[] aiMetrics;
         //RadarPolygon rpOutline = radarChartOrange.transform.GetChild(0).GetComponent<RadarPolygon>();
         //RadarPolygon rpFill = radarChartOrange.transform.GetChild(1).GetComponent<RadarPolygon>();
 
         mlCity = data.predict;
-        mlScores = data.predict.objects.scores;
+        //Debug.Log(mlCity.objects.metrics.Density);
+        mlMetrics = new float[] { mlCity.objects.metrics.Density[0],
+            mlCity.objects.metrics.Diversity[0],
+            mlCity.objects.metrics.Energy[0],
+            mlCity.objects.metrics.Traffic[0],
+            mlCity.objects.metrics.Solar[0] }; //RZ 170703
         //rpOutline.color = Color.red;
         //rpFill.color = new Color(1.0f, 0.0f, 0.0f, 0.25f);
         aiCity = data.ai;
-        aiScores = data.ai.objects.scores;
+        aiMetrics = new float[] { aiCity.objects.metrics.Density[0],
+            aiCity.objects.metrics.Diversity[0],
+            aiCity.objects.metrics.Energy[0],
+            aiCity.objects.metrics.Traffic[0],
+            aiCity.objects.metrics.Solar[0] }; //RZ 170703
         //rpOutline.color = Color.green;
         //rpFill.color = new Color(0.0f, 1.0f, 0.0f, 0.25f);
 
@@ -173,17 +182,17 @@ public class CityDataCtrl : MonoBehaviour
 
         //RZ 17015 update radar chart values
         //radarChartOrange.GetComponent<RadarChartCtrl>().values[0] = mlOrAiCity.objects.popDensity;
-        for (int i = 0; i < mlScores.Length; i++)
+        for (int i = 0; i < mlMetrics.Length; i++)
         {
-            mlScores[i] = Mathf.Max(0.01f, Mathf.Min(1.0f, mlScores[i]));
+            mlMetrics[i] = Mathf.Max(0.01f, Mathf.Min(1.0f, mlMetrics[i]));
         }
-        for (int i = 0; i < aiScores.Length; i++)
+        for (int i = 0; i < aiMetrics.Length; i++)
         {
-            aiScores[i] = Mathf.Max(0.01f, Mathf.Min(1.0f, aiScores[i]));
+            aiMetrics[i] = Mathf.Max(0.01f, Mathf.Min(1.0f, aiMetrics[i]));
         }
         //radarChartOrange.GetComponent<RadarChartCtrl>().values = mlScores;  //RZ 170702
-        CMRadarChart.metrics = mlScores;
-        CMRadarChart.metricsSuggested = aiScores;
+        CMRadarChart.metrics = mlMetrics;
+        CMRadarChart.metricsSuggested = aiMetrics;
 
         /*  //RZ 170702
         //RZ clear up all prev highlight
@@ -380,5 +389,15 @@ public class JSONObjects
 
     //RZ 170615 get meta data from JSON sent by GH VIZ
     public int AIStep;
-    public float[] scores;
+    public JSONMetrics metrics; //RZ 170703
+}
+
+[Serializable]
+public class JSONMetrics
+{
+    public float[] Density;
+    public float[] Diversity;
+    public float[] Energy;
+    public float[] Traffic;
+    public float[] Solar;
 }
