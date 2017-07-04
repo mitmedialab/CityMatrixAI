@@ -61,11 +61,11 @@ public class HighLevelScoreCtrl : MonoBehaviour {
         string REDeltaStr;
         if (REDelta >= 0.0f)
         {
-            REDeltaStr = "+" + string.Format("{0:0}", IPDelta);
+            REDeltaStr = "+" + string.Format("{0:0}", REDelta);
         }
         else
         {
-            REDeltaStr = "-" + string.Format("{0:0}", -IPDelta);
+            REDeltaStr = "-" + string.Format("{0:0}", - REDelta);
         }
         resourceEfficiencyScoreSuggested.text = REDeltaStr;
     }
