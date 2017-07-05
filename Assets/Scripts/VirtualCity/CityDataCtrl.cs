@@ -123,19 +123,19 @@ public class CityDataCtrl : MonoBehaviour
 
         mlCity = data.predict;
         //Debug.Log(mlCity.objects.metrics.Density);
-        mlMetrics = new float[] { mlCity.objects.metrics.Density[0],
-            mlCity.objects.metrics.Diversity[0],
-            mlCity.objects.metrics.Energy[0],
-            mlCity.objects.metrics.Traffic[0],
-            mlCity.objects.metrics.Solar[0] }; //RZ 170703
+        mlMetrics = new float[] { mlCity.objects.metrics.Density.metric,
+            mlCity.objects.metrics.Diversity.metric,
+            mlCity.objects.metrics.Energy.metric,
+            mlCity.objects.metrics.Traffic.metric,
+            mlCity.objects.metrics.Solar.metric }; //RZ 170703
         //rpOutline.color = Color.red;
         //rpFill.color = new Color(1.0f, 0.0f, 0.0f, 0.25f);
         aiCity = data.ai;
-        aiMetrics = new float[] { aiCity.objects.metrics.Density[0],
-            aiCity.objects.metrics.Diversity[0],
-            aiCity.objects.metrics.Energy[0],
-            aiCity.objects.metrics.Traffic[0],
-            aiCity.objects.metrics.Solar[0] }; //RZ 170703
+        aiMetrics = new float[] { aiCity.objects.metrics.Density.metric,
+            aiCity.objects.metrics.Diversity.metric,
+            aiCity.objects.metrics.Energy.metric,
+            aiCity.objects.metrics.Traffic.metric,
+            aiCity.objects.metrics.Solar.metric }; //RZ 170703
         //rpOutline.color = Color.green;
         //rpFill.color = new Color(0.0f, 1.0f, 0.0f, 0.25f);
 
@@ -194,7 +194,8 @@ public class CityDataCtrl : MonoBehaviour
         CMRadarChart.metrics = mlMetrics;
         CMRadarChart.metricsSuggested = aiMetrics;
 
-        /*  //RZ 170702
+        //RZ 170702
+        /*
         //RZ clear up all prev highlight
         foreach (Transform child in mainView.transform)
         {
@@ -202,9 +203,7 @@ public class CityDataCtrl : MonoBehaviour
             Debug.Log(ot);
             BuildingHighlighter.RemoveHighlight(ot);
         }
-        */
 
-        /*  //RZ 170702
         if (highlightAI)
         {
             for (int idx = 0; idx < highlightsToClear.Count; idx++)
@@ -395,9 +394,44 @@ public class JSONObjects
 [Serializable]
 public class JSONMetrics
 {
-    public float[] Density;
-    public float[] Diversity;
-    public float[] Energy;
-    public float[] Traffic;
-    public float[] Solar;
+    public JSONMDensity Density;
+    public JSONMDiversity Diversity;
+    public JSONMEnergy Energy;
+    public JSONMTraffic Traffic;
+    public JSONMSolar Solar;
+}
+
+[Serializable]
+public class JSONMDensity
+{
+    public float metric;
+    public float weight;
+}
+
+[Serializable]
+public class JSONMDiversity
+{
+    public float metric;
+    public float weight;
+}
+
+[Serializable]
+public class JSONMEnergy
+{
+    public float metric;
+    public float weight;
+}
+
+[Serializable]
+public class JSONMTraffic
+{
+    public float metric;
+    public float weight;
+}
+
+[Serializable]
+public class JSONMSolar
+{
+    public float metric;
+    public float weight;
 }
