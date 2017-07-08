@@ -91,7 +91,7 @@ public class CityDataCtrl : MonoBehaviour
         if (data == null) return;
 
         //RZ 170615 AIStep and animBlink control
-        AIStep = data.ai.objects.AIStep;
+        AIStep = data.predict.objects.AIStep;
         //animBlink = data.ai.objects.animBlink; //RZ 170702
 
         //RZ 190621 show AI suggestion and highlight or not
@@ -131,11 +131,21 @@ public class CityDataCtrl : MonoBehaviour
         //rpOutline.color = Color.red;
         //rpFill.color = new Color(1.0f, 0.0f, 0.0f, 0.25f);
         aiCity = data.ai;
-        aiMetrics = new float[] { aiCity.objects.metrics.Density.metric,
+        //Debug.Log(aiCity.objects);
+        if (AIStep == 20) //(data.ai.objects != null)
+        {
+
+            aiMetrics = new float[] { aiCity.objects.metrics.Density.metric,
             aiCity.objects.metrics.Diversity.metric,
             aiCity.objects.metrics.Energy.metric,
             aiCity.objects.metrics.Traffic.metric,
             aiCity.objects.metrics.Solar.metric }; //RZ 170703
+        }
+        else
+        {
+            aiMetrics = new float[] { 0, 0, 0, 0, 0 };
+        }
+       
         //rpOutline.color = Color.green;
         //rpFill.color = new Color(0.0f, 1.0f, 0.0f, 0.25f);
 
