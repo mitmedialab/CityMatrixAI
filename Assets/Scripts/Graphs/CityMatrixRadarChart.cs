@@ -24,6 +24,7 @@ public class CityMatrixRadarChart : MonoBehaviour {
     public float[] metrics;
     public GameObject currentLineDensityDiversity;
     public GameObject currentLineEnergyTrafficSolar;
+    public GameObject currentLineAll;
     public GameObject currentDashLineDiversityEnergy;
     public GameObject currentDashLineSolarDensity;
     public GameObject currentFillDensityDiversity;
@@ -41,6 +42,7 @@ public class CityMatrixRadarChart : MonoBehaviour {
     public float[] metricsSuggested;
     public GameObject suggestedLineDensityDiversity;
     public GameObject suggestedLineEnergyTrafficSolar;
+    public GameObject suggestedLineAll;
     public GameObject suggestedDashLineDiversityEnergy;
     public GameObject suggestedDashLineSolarDensity;
 
@@ -50,6 +52,7 @@ public class CityMatrixRadarChart : MonoBehaviour {
     // history0
     public GameObject history0LineDensityDiversity;
     public GameObject history0LineEnergyTrafficSolar;
+    public GameObject history0LineAll;
     public GameObject history0DashLineDiversityEnergy;
     public GameObject history0DashLineSolarDensity;
 
@@ -59,6 +62,7 @@ public class CityMatrixRadarChart : MonoBehaviour {
     // history1
     public GameObject history1LineDensityDiversity;
     public GameObject history1LineEnergyTrafficSolar;
+    public GameObject history1LineAll;
     public GameObject history1DashLineDiversityEnergy;
     public GameObject history1DashLineSolarDensity;
 
@@ -82,59 +86,67 @@ public class CityMatrixRadarChart : MonoBehaviour {
         if (showHistoryStep == 1)
         {
             // history 0
-            history0LineDensityDiversity.SetActive(true);
-            history0LineEnergyTrafficSolar.SetActive(true);
-            history0DashLineDiversityEnergy.SetActive(true);
-            history0DashLineSolarDensity.SetActive(true);
+            //history0LineDensityDiversity.SetActive(true);
+            //history0LineEnergyTrafficSolar.SetActive(true);
+            history0LineAll.SetActive(true);
+            //history0DashLineDiversityEnergy.SetActive(true);
+            //history0DashLineSolarDensity.SetActive(true);
             // history 1
-            history1LineDensityDiversity.SetActive(false);
-            history1LineEnergyTrafficSolar.SetActive(false);
-            history1DashLineDiversityEnergy.SetActive(false);
-            history1DashLineSolarDensity.SetActive(false);
+            //history1LineDensityDiversity.SetActive(false);
+            //history1LineEnergyTrafficSolar.SetActive(false);
+            history1LineAll.SetActive(false);
+            //history1DashLineDiversityEnergy.SetActive(false);
+            //history1DashLineSolarDensity.SetActive(false);
         }
         else if (showHistoryStep == 2)
         {
             // history 0
-            history0LineDensityDiversity.SetActive(true);
-            history0LineEnergyTrafficSolar.SetActive(true);
-            history0DashLineDiversityEnergy.SetActive(true);
-            history0DashLineSolarDensity.SetActive(true);
+            //history0LineDensityDiversity.SetActive(true);
+            //history0LineEnergyTrafficSolar.SetActive(true);
+            history0LineAll.SetActive(true);
+            //history0DashLineDiversityEnergy.SetActive(true);
+            //history0DashLineSolarDensity.SetActive(true);
             // history 1
-            history1LineDensityDiversity.SetActive(true);
-            history1LineEnergyTrafficSolar.SetActive(true);
-            history1DashLineDiversityEnergy.SetActive(true);
-            history1DashLineSolarDensity.SetActive(true);
+            //history1LineDensityDiversity.SetActive(true);
+            //history1LineEnergyTrafficSolar.SetActive(true);
+            history1LineAll.SetActive(true);
+            //history1DashLineDiversityEnergy.SetActive(true);
+            //history1DashLineSolarDensity.SetActive(true);
         }
         else
         {
             // history 0
-            history0LineDensityDiversity.SetActive(false);
-            history0LineEnergyTrafficSolar.SetActive(false);
-            history0DashLineDiversityEnergy.SetActive(false);
-            history0DashLineSolarDensity.SetActive(false);
+            //history0LineDensityDiversity.SetActive(false);
+            //history0LineEnergyTrafficSolar.SetActive(false);
+            history0LineAll.SetActive(false);
+            //history0DashLineDiversityEnergy.SetActive(false);
+            //history0DashLineSolarDensity.SetActive(false);
             // history 1
-            history1LineDensityDiversity.SetActive(false);
-            history1LineEnergyTrafficSolar.SetActive(false);
-            history1DashLineDiversityEnergy.SetActive(false);
-            history1DashLineSolarDensity.SetActive(false);
+            //history1LineDensityDiversity.SetActive(false);
+            //history1LineEnergyTrafficSolar.SetActive(false);
+            history1LineAll.SetActive(false);
+            //history1DashLineDiversityEnergy.SetActive(false);
+            //history1DashLineSolarDensity.SetActive(false);
         }
 
         // suggestion visiblility control
         if (showAISuggestion)
         {
-            suggestedLineDensityDiversity.SetActive(true);
-            suggestedLineEnergyTrafficSolar.SetActive(true);
-            suggestedDashLineDiversityEnergy.SetActive(true);
-            suggestedDashLineSolarDensity.SetActive(true);
-            suggestedFills.SetActive(true);
+            //suggestedLineDensityDiversity.SetActive(true);
+            //suggestedLineEnergyTrafficSolar.SetActive(true);
+            suggestedLineAll.SetActive(true);
+            //suggestedDashLineDiversityEnergy.SetActive(true);
+            //suggestedDashLineSolarDensity.SetActive(true);
+            //suggestedFills.SetActive(true);
         }
         else
         {
-            suggestedLineDensityDiversity.SetActive(false);
-            suggestedLineEnergyTrafficSolar.SetActive(false);
-            suggestedDashLineDiversityEnergy.SetActive(false);
-            suggestedDashLineSolarDensity.SetActive(false);
-            suggestedFills.SetActive(false);
+            //suggestedLineDensityDiversity.SetActive(false);
+            //suggestedLineEnergyTrafficSolar.SetActive(false);
+            suggestedLineAll.SetActive(false);
+            //suggestedDashLineDiversityEnergy.SetActive(false);
+            //suggestedDashLineSolarDensity.SetActive(false);
+            //suggestedFills.SetActive(false);
         }
 
         // when there's an update
@@ -155,17 +167,23 @@ public class CityMatrixRadarChart : MonoBehaviour {
             }
 
             // update lines
-            currentLineDensityDiversity.GetComponent<LineRenderer>().SetPosition(0, movingRefPts[0].transform.position);
-            currentLineDensityDiversity.GetComponent<LineRenderer>().SetPosition(1, movingPts[1]);
-            currentLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(0, movingPts[2]);
-            currentLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(1, movingPts[3]);
-            currentLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(2, movingPts[4]);
+            //currentLineDensityDiversity.GetComponent<LineRenderer>().SetPosition(0, movingRefPts[0].transform.position);
+            //currentLineDensityDiversity.GetComponent<LineRenderer>().SetPosition(1, movingPts[1]);
+            //currentLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(0, movingPts[2]);
+            //currentLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(1, movingPts[3]);
+            //currentLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(2, movingPts[4]);
+            currentLineAll.GetComponent<LineRenderer>().SetPosition(0, movingPts[0]);
+            currentLineAll.GetComponent<LineRenderer>().SetPosition(1, movingPts[1]);
+            currentLineAll.GetComponent<LineRenderer>().SetPosition(2, movingPts[2]);
+            currentLineAll.GetComponent<LineRenderer>().SetPosition(3, movingPts[3]);
+            currentLineAll.GetComponent<LineRenderer>().SetPosition(4, movingPts[4]);
+            currentLineAll.GetComponent<LineRenderer>().SetPosition(5, movingPts[0]);
 
             // update dash lines
-            currentDashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(0, movingPts[1]);
-            currentDashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(1, movingPts[2]);
-            currentDashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(0, movingPts[4]);
-            currentDashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(1, movingPts[0]);
+            //currentDashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(0, movingPts[1]);
+            //currentDashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(1, movingPts[2]);
+            //currentDashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(0, movingPts[4]);
+            //currentDashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(1, movingPts[0]);
 
 
             // HISTORY0
@@ -181,17 +199,23 @@ public class CityMatrixRadarChart : MonoBehaviour {
             //Debug.Log(movingPtsHistory0[0]);
 
             // update lines
-            history0LineDensityDiversity.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[0]);
-            history0LineDensityDiversity.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[1]);
-            history0LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[2]);
-            history0LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[3]);
-            history0LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(2, movingPtsHistory0[4]);
+            //history0LineDensityDiversity.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[0]);
+            //history0LineDensityDiversity.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[1]);
+            //history0LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[2]);
+            //history0LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[3]);
+            //history0LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(2, movingPtsHistory0[4]);
+            history0LineAll.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[0]);
+            history0LineAll.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[1]);
+            history0LineAll.GetComponent<LineRenderer>().SetPosition(2, movingPtsHistory0[2]);
+            history0LineAll.GetComponent<LineRenderer>().SetPosition(3, movingPtsHistory0[3]);
+            history0LineAll.GetComponent<LineRenderer>().SetPosition(4, movingPtsHistory0[4]);
+            history0LineAll.GetComponent<LineRenderer>().SetPosition(5, movingPtsHistory0[0]);
 
             // update dash lines
-            history0DashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[1]);
-            history0DashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[2]);
-            history0DashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[4]);
-            history0DashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[0]);
+            //history0DashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[1]);
+            //history0DashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[2]);
+            //history0DashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory0[4]);
+            //history0DashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory0[0]);
 
 
             // HISTORY1
@@ -207,17 +231,23 @@ public class CityMatrixRadarChart : MonoBehaviour {
             //Debug.Log(movingPtsHistory1[0]);
 
             // update lines
-            history1LineDensityDiversity.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[0]);
-            history1LineDensityDiversity.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[1]);
-            history1LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[2]);
-            history1LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[3]);
-            history1LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(2, movingPtsHistory1[4]);
+            //history1LineDensityDiversity.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[0]);
+            //history1LineDensityDiversity.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[1]);
+            //history1LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[2]);
+            //history1LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[3]);
+            //history1LineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(2, movingPtsHistory1[4]);
+            history1LineAll.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[0]);
+            history1LineAll.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[1]);
+            history1LineAll.GetComponent<LineRenderer>().SetPosition(2, movingPtsHistory1[2]);
+            history1LineAll.GetComponent<LineRenderer>().SetPosition(3, movingPtsHistory1[3]);
+            history1LineAll.GetComponent<LineRenderer>().SetPosition(4, movingPtsHistory1[4]);
+            history1LineAll.GetComponent<LineRenderer>().SetPosition(5, movingPtsHistory1[0]);
 
             // update dash lines
-            history1DashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[1]);
-            history1DashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[2]);
-            history1DashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[4]);
-            history1DashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[0]);
+            //history1DashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[1]);
+            //history1DashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[2]);
+            //history1DashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(0, movingPtsHistory1[4]);
+            //history1DashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(1, movingPtsHistory1[0]);
 
 
             // UPDATE HISTORY MATRICS
@@ -245,17 +275,23 @@ public class CityMatrixRadarChart : MonoBehaviour {
             }
 
             // update lines
-            suggestedLineDensityDiversity.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[0]);
-            suggestedLineDensityDiversity.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[1]);
-            suggestedLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[2]);
-            suggestedLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[3]);
-            suggestedLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(2, movingPtsSuggested[4]);
+            //suggestedLineDensityDiversity.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[0]);
+            //suggestedLineDensityDiversity.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[1]);
+            //suggestedLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[2]);
+            //suggestedLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[3]);
+            //suggestedLineEnergyTrafficSolar.GetComponent<LineRenderer>().SetPosition(2, movingPtsSuggested[4]);
+            suggestedLineAll.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[0]);
+            suggestedLineAll.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[1]);
+            suggestedLineAll.GetComponent<LineRenderer>().SetPosition(2, movingPtsSuggested[2]);
+            suggestedLineAll.GetComponent<LineRenderer>().SetPosition(3, movingPtsSuggested[3]);
+            suggestedLineAll.GetComponent<LineRenderer>().SetPosition(4, movingPtsSuggested[4]);
+            suggestedLineAll.GetComponent<LineRenderer>().SetPosition(5, movingPtsSuggested[0]);
 
             // update dash lines
-            suggestedDashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[1]);
-            suggestedDashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[2]);
-            suggestedDashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[4]);
-            suggestedDashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[0]);
+            //suggestedDashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[1]);
+            //suggestedDashLineDiversityEnergy.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[2]);
+            //suggestedDashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(0, movingPtsSuggested[4]);
+            //suggestedDashLineSolarDensity.GetComponent<LineRenderer>().SetPosition(1, movingPtsSuggested[0]);
 
         }
 

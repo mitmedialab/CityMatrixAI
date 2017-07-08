@@ -10,12 +10,15 @@ public class HighLevelScoreCtrl : MonoBehaviour {
     public CityMatrixRadarChart CMRadarChart;
     public Text innovationPotentialScore;
     public Text resourceEfficiencyScore;
+    public Text totalScore;
     public Text innovationPotentialScoreSuggested;
     public Text resourceEfficiencyScoreSuggested;
     public GameObject currentScores;
     public GameObject suggestedScores;
     public GameObject arrows;
     public CityDataCtrl cityDataCtrl;
+    public Text weight1;
+    public Text weight2;
 
     void Update () {
 
@@ -40,6 +43,9 @@ public class HighLevelScoreCtrl : MonoBehaviour {
         float REScore = (CMRadarChart.metrics[2] + CMRadarChart.metrics[3]
             + CMRadarChart.metrics[4]) / 3.0f * 100.0f;
         resourceEfficiencyScore.text = string.Format("{0:0}", REScore);
+
+        float tScore = IPScore * float.Parse(weight1.text)/100.0f + REScore * float.Parse(weight2.text) / 100.0f;
+        totalScore.text = string.Format("{0:0}", tScore);
 
         // suggested
         float IPScoreSuggested = (CMRadarChart.metricsSuggested[0] + CMRadarChart.metricsSuggested[1]) / 2.0f * 100.0f;
